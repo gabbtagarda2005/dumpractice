@@ -1,0 +1,787 @@
+<div class="stars">
+    <div class="star star-1"></div>
+    <div class="star star-2"></div>
+    <div class="star star-3"></div>
+    <div class="star star-4"></div>
+    <div class="star star-5"></div>
+    <div class="star star-6"></div>
+    <div class="star star-7"></div>
+    <div class="star star-8"></div>
+    <div class="star star-9"></div>
+    <div class="star star-10"></div>
+    <div class="star star-11"></div>
+    <div class="star star-12"></div>
+    <div class="star star-13"></div>
+    <div class="star star-14"></div>
+    <div class="star star-15"></div>
+</div>
+
+<div class="shooting-stars">
+    <div class="shooting-star shooting-star-1"></div>
+    <div class="shooting-star shooting-star-2"></div>
+    <div class="shooting-star shooting-star-3"></div>
+</div>
+
+<div class="sun">
+    <div class="sun-core"></div>
+    <div class="sun-ray ray-1"></div>
+    <div class="sun-ray ray-2"></div>
+    <div class="sun-ray ray-3"></div>
+    <div class="sun-ray ray-4"></div>
+    <div class="sun-ray ray-5"></div>
+    <div class="sun-ray ray-6"></div>
+    <div class="sun-ray ray-7"></div>
+    <div class="sun-ray ray-8"></div>
+    <div class="sun-ray ray-9"></div>
+    <div class="sun-ray ray-10"></div>
+    <div class="sun-ray ray-11"></div>
+    <div class="sun-ray ray-12"></div>
+</div>
+
+<div class="flower">
+    <div class="flower-pp" onclick="showMessage('Yellow Sunflower', 'A beautiful yellow sunflower reaching for the sun!')">
+        <div class="flower_l"></div>
+        <div class="f">
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+            <div class="leaf leaf--4"></div>
+            <div class="leaf leaf--5"></div>
+            <div class="leaf leaf--6"></div>
+            <div class="leaf leaf--7"></div>
+            <div class="leaf leaf--8 flower__fall-down--yellow"></div>
+        </div>
+    </div>
+
+    <div class="flower-pp flower-pp--2" onclick="showMessage('Pink Rose', 'A delicate pink rose with soft petals!')">
+        <div class="flower_l"></div>
+        <div class="f">
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+            <div class="leaf leaf--4"></div>
+            <div class="leaf leaf--5"></div>
+            <div class="leaf leaf--6"></div>
+            <div class="leaf leaf--7"></div>
+            <div class="leaf leaf--8 flower__fall-down--pink"></div>
+        </div>
+    </div>
+
+    <div class="flower-pp flower-pp--3" onclick="showMessage('Purple Lavender', 'A fragrant purple lavender with calming aroma!')">
+        <div class="flower_l"></div>
+        <div class="f">
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+            <div class="leaf leaf--4"></div>
+            <div class="leaf leaf--5"></div>
+            <div class="leaf leaf--6"></div>
+            <div class="leaf leaf--7"></div>
+            <div class="leaf leaf--8 flower__fall-down--purple"></div>
+        </div>
+    </div>
+    <div class="flower__glass"></div>
+</div>
+
+<!-- Popup Message Container -->
+<div id="messagePopup" class="message-popup">
+    <div class="message-content">
+        <h3 id="messageTitle"></h3>
+        <p id="messageText"></p>
+        <button onclick="closeMessage()" class="close-btn">Close</button>
+    </div>
+</div>
+
+<style>
+    *,
+*::after,
+*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --color-bg: linear-gradient(to top,#010329,#000005);
+    --color-glass:linear-gradient(to left,#142544,#1a9092);
+    --color-water:linear-gradient(to left,#142544,#1b6d6e);
+}
+
+body{
+    background-image:var(--color-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    overflow: hidden;
+}
+
+/* Stars Styles */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.star-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.star-2 { top: 15%; left: 20%; animation-delay: 0.5s; }
+.star-3 { top: 8%; left: 35%; animation-delay: 1s; }
+.star-4 { top: 25%; left: 15%; animation-delay: 1.5s; }
+.star-5 { top: 12%; left: 45%; animation-delay: 2s; }
+.star-6 { top: 30%; left: 25%; animation-delay: 2.5s; }
+.star-7 { top: 18%; left: 55%; animation-delay: 3s; }
+.star-8 { top: 35%; left: 35%; animation-delay: 3.5s; }
+.star-9 { top: 22%; left: 65%; animation-delay: 4s; }
+.star-10 { top: 40%; left: 45%; animation-delay: 4.5s; }
+.star-11 { top: 28%; left: 75%; animation-delay: 5s; }
+.star-12 { top: 45%; left: 55%; animation-delay: 5.5s; }
+.star-13 { top: 32%; left: 85%; animation-delay: 6s; }
+.star-14 { top: 50%; left: 65%; animation-delay: 6.5s; }
+.star-15 { top: 38%; left: 95%; animation-delay: 7s; }
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Shooting Stars Styles */
+.shooting-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, white, transparent);
+    border-radius: 50%;
+    animation: shootingStar 8s linear infinite;
+    opacity: 0;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.shooting-star-1 {
+    top: 20%;
+    left: -100px;
+    animation-delay: 0s;
+    transform: rotate(45deg);
+}
+
+.shooting-star-2 {
+    top: 40%;
+    left: -100px;
+    animation-delay: 3s;
+    transform: rotate(60deg);
+}
+
+.shooting-star-3 {
+    top: 60%;
+    left: -100px;
+    animation-delay: 6s;
+    transform: rotate(30deg);
+}
+
+@keyframes shootingStar {
+    0% {
+        opacity: 0;
+        transform: translateX(0) rotate(45deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(120vw) rotate(45deg);
+    }
+}
+
+/* Sun Styles */
+.sun {
+    position: fixed;
+    top: 10%;
+    right: 15%;
+    z-index: 10;
+}
+
+.sun-core {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffeb3b, #ffc107, #ff9800);
+    border-radius: 50%;
+    position: relative;
+    animation: sunPulse 3s ease-in-out infinite;
+    box-shadow: 
+        0 0 30px rgba(255, 235, 59, 0.6),
+        0 0 60px rgba(255, 193, 7, 0.4),
+        0 0 90px rgba(255, 152, 0, 0.2);
+}
+
+.sun-ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 25px;
+    background: linear-gradient(to bottom, #ffeb3b, transparent);
+    border-radius: 2px;
+    transform-origin: 2px 0;
+    animation: sunRotate 20s linear infinite;
+}
+
+.ray-1 { transform: translate(-50%, -50%) rotate(0deg); }
+.ray-2 { transform: translate(-50%, -50%) rotate(30deg); }
+.ray-3 { transform: translate(-50%, -50%) rotate(60deg); }
+.ray-4 { transform: translate(-50%, -50%) rotate(90deg); }
+.ray-5 { transform: translate(-50%, -50%) rotate(120deg); }
+.ray-6 { transform: translate(-50%, -50%) rotate(150deg); }
+.ray-7 { transform: translate(-50%, -50%) rotate(180deg); }
+.ray-8 { transform: translate(-50%, -50%) rotate(210deg); }
+.ray-9 { transform: translate(-50%, -50%) rotate(240deg); }
+.ray-10 { transform: translate(-50%, -50%) rotate(270deg); }
+.ray-11 { transform: translate(-50%, -50%) rotate(300deg); }
+.ray-12 { transform: translate(-50%, -50%) rotate(330deg); }
+
+@keyframes sunPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+            0 0 30px rgba(255, 235, 59, 0.6),
+            0 0 60px rgba(255, 193, 7, 0.4),
+            0 0 90px rgba(255, 152, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 
+            0 0 40px rgba(255, 235, 59, 0.8),
+            0 0 80px rgba(255, 193, 7, 0.6),
+            0 0 120px rgba(255, 152, 0, 0.4);
+    }
+}
+
+@keyframes sunRotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.flower{
+    position: relative;
+}
+
+.flower__glass{
+    width:20vmin;
+    height: 30vmin;
+    background-image: var(--color-glass);
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+    opacity: .8;
+    position: relative;
+    box-shadow: 0 0 20px rgba(26, 144, 146, 0.3);
+}
+
+.flower__glass::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #182843;
+    width: 100%;
+    height: 2vmin;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.flower__glass::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: var(--color-water);
+    width: 100%;
+    height: 15vmin;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2);
+}
+
+.flower-pp{
+    position: absolute;
+    left: 45%;
+    bottom: 2vmin;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.flower-pp:hover {
+    transform: scale(1.05);
+}
+
+.flower-pp--2{
+    left: 50%;
+    bottom: 5%;
+    transform-origin: 10% left;
+    transform: rotate(20deg);
+}
+
+.flower-pp--3{
+    left: 30%;
+    bottom: 5%;
+    transform-origin: 10% left;
+    transform: rotate(-10deg);
+}
+
+.flower-pp--3 .flower_l{
+    height: 45vmin;
+    position: relative;
+}
+
+.flower-pp--3 .flower_l::after{
+    content: '';
+    position: absolute;
+    left:0;
+    top: 0;
+    width: 6vmin;
+    height: 6vmin;
+    transform: translate(-69%,-30%) rotate(-5deg);
+    border-radius:10vmin 10vmin 0 0;
+    border: 2vmin solid  #104d4e;
+    border-bottom: transparent;
+    border-left: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.flower-pp--3 .flower_l::before{
+    content: '';
+    position: absolute;
+    left:-40%;
+    top: -1%;
+    width: 6vmin;
+    height: 2vmin;
+    transform-origin: right;
+    transform: translate(-100%,-80%) rotate(-20deg);
+    background-color: #104d4e;
+    border-radius: 2vmin;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.flower-pp--3 .flower_l{
+    background-image: linear-gradient(to top,#142544,#104d4e);
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+}
+
+.flower-pp--2 .flower_l{
+    height: 45vmin;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+}
+
+.flower-pp--2 .f{
+    transform: translateX(-50%) rotate(20deg);
+}
+
+.flower-pp--3 .f{
+    transform: translate(-350%,-50%) rotate(-120deg);
+}
+
+.flower-pp--2 .leaf:not(:first-child){
+    width: 3.8vmin;
+    height: 10vmin;
+    background-image: linear-gradient(to bottom, #ff6bb5 ,#e91e63, #c2185b 99%);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.flower-pp--3 .leaf:not(:first-child){
+    width: 3.8vmin;
+    height: 10vmin;
+    background-image: linear-gradient(to bottom, #ba68c8 ,#9c27b0, #7b1fa2 99%);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.flower-pp--3 .leaf--1{
+    width: 8vmin;
+    height: 10vmin;
+    bottom: 2vmin;
+    background: radial-gradient(circle at 30% 30%, #ce93d8, #ba68c8, #9c27b0);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+}
+
+.flower-pp--2 .leaf--1{
+    width: 8vmin;
+    height: 10vmin;
+    bottom: 2vmin;
+    background: radial-gradient(circle at 30% 30%, #f8bbd9, #f48fb1, #e91e63);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+}
+
+.flower-pp--2 .f .leaf--8{
+    width: 10vmin;
+    height: 9vmin;
+    bottom: 3vmin;
+    left: -30%;
+    transform: rotate(-50deg);
+    background-image: linear-gradient(to left bottom, #ff6bb5 ,#e91e63);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+.flower-pp--3 .f .leaf--8{
+    width: 10vmin;
+    height: 9vmin;
+    left: -10% !important;
+    background-image: linear-gradient(to left bottom, #ba68c8 ,#9c27b0);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+.flower_l{
+    width: 2vmin;
+    height: 56vmin;
+    background-image: linear-gradient(to left top,#82fdff 20%,#142544,#104d4e);
+    border-radius: 4vmin;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+}
+
+.f{
+    position: absolute;
+    top: 1vmin;
+    left: 50%;
+    transform: translateX(-50%) rotate(-10deg);
+    width: 2vmin;
+    height: 2vmin;
+}
+
+.leaf{
+    position: absolute;
+    left: 50%;
+    bottom: 2vmin;
+    transform: translateX(-50%);
+    width: 5vmin;
+    height: 14vmin;
+    background-image: linear-gradient(to bottom, #ffb74d ,#ff9800, #f57c00 99%);
+    clip-path: ellipse(50% 50% at 50% 50%);
+    transform-origin: center bottom;
+    animation: open-flower 2s 1s backwards;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.leaf--1{
+    width: 10vmin;
+    height: 12vmin;
+    bottom: 3vmin;
+    border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+    background: radial-gradient(circle at 30% 30%, #ffcc80, #ffb74d, #ff9800);
+    background-image: none;
+    animation: open-flowe--middle  1.4s 1s backwards;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+}
+
+.leaf--2{
+    transform: translateX(-50%) rotate(-30deg);
+}
+.leaf--3{
+    transform: translateX(-50%) rotate(-50deg);
+}
+.leaf--4{
+    transform: translateX(-50%) rotate(-70deg);
+}
+
+.leaf--5{
+    transform: translateX(-50%) rotate(30deg);
+}
+
+.leaf--6{
+    transform: translateX(-50%) rotate(50deg);
+}
+
+.leaf--7{
+    transform: translateX(-50%) rotate(70deg);
+}
+
+.leaf--8{
+    width: 13vmin;
+    height: 11vmin;
+    bottom: 6vmin;
+    left: -30%;
+    border-radius: none;
+    clip-path: none;
+    border-radius: 10vmin 2vmin 10vmin 2vmin;
+    transform: rotate(-55deg);
+    background-image: linear-gradient(to left bottom, #ffb74d ,#ff9800,#e65100 98%);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+}
+
+.flower__fall-down--yellow{
+    animation: flower-fall-down-yellow  8s 1.2s linear forwards;
+}
+
+.flower__fall-down--pink{
+    animation: flower-fall-down-pink  5s 1.2s linear forwards;
+}
+
+.flower__fall-down--purple{
+    bottom: 4vmin;
+    animation:flower-fall-down-purple  6s 1.2s linear forwards, flower-falling 6s 7.2s linear infinite;
+}
+
+/* Add subtle swaying animation for more realism */
+.flower-pp {
+    animation: gentle-sway 4s ease-in-out infinite;
+}
+
+.flower-pp--2 {
+    animation: gentle-sway 4s ease-in-out infinite 0.5s;
+}
+
+.flower-pp--3 {
+    animation: gentle-sway 4s ease-in-out infinite 1s;
+}
+
+@keyframes gentle-sway {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+}
+
+/* Popup Message Styles */
+.message-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.message-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    margin: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: popupSlide 0.3s ease-out;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.message-content h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.message-content p {
+    color: #f0f0f0;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.close-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+@keyframes popupSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes open-flower{
+        0%{
+            transform:  translateX(-50%) rotate(0);
+        }
+}
+
+@keyframes open-flowe--middle {
+    0%{
+        opacity: 0;
+        transform: translateX(-50%) scale(0);
+    }
+}
+
+@keyframes flower-fall-down-pink {
+
+    0%{
+        transform: rotate(-55deg);
+    }
+
+    50%{
+        transform: rotateX(-100deg);
+    }
+
+    100%{
+        transform:translate(2vmin,28vmin);
+    }
+
+}
+
+@keyframes flower-fall-down-yellow {
+
+    0%{
+        transform: rotate(-55deg);
+    }
+
+    50%{
+        bottom: 3vmin;
+        transform: rotateX(-100deg);
+    }
+
+    100%{
+        transform:translate(2vmin,70vmin) rotate(150deg);
+    }
+
+}
+
+@keyframes flower-fall-down-purple {
+
+    0%{
+        transform: rotate(-50deg);
+    }
+
+    25%{
+        bottom: 1vmin ;
+        transform: rotateX(-100deg);
+        perspective: 0px;
+    }
+
+    50%{
+        perspective: 0px;
+        transform:translate(-30vmin,2vmin) rotate(90deg);
+    }
+
+    75%{
+        perspective: 0px;
+        transform:translate(-34vmin,-2vmin);
+    }
+
+    100%{
+        transform-origin: center;
+        transform:translate(-34vmin,-2vmin) rotateY(-80deg) rotateX(35deg);
+    }
+
+}
+
+@keyframes flower-falling {
+    0%,100%{
+        transform-origin: center;
+        transform:translate(-34vmin,-2vmin) rotateY(-80deg) rotateX(35deg);
+    }
+
+    25%{
+        transform-origin: center;
+        transform:translate(-34.4vmin,-2vmin) rotateY(-84deg) rotateX(35deg);
+    }
+
+    50%{
+        transform-origin: center;
+        transform:translate(-32vmin,-4.2vmin) rotateY(-80deg) rotateX(35deg);
+    }
+
+    75%{
+        transform-origin: center;
+        transform:translate(-36vmin,1.1vmin) rotateY(-80deg) rotateX(35deg);
+    }
+}
+
+</style>
+
+<script>
+function showMessage(title, text) {
+    document.getElementById('messageTitle').textContent = title;
+    document.getElementById('messageText').textContent = text;
+    document.getElementById('messagePopup').style.display = 'flex';
+    
+    // Add click sound effect (optional)
+    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+    audio.volume = 0.3;
+    audio.play().catch(() => {}); // Ignore if audio fails to play
+}
+
+function closeMessage() {
+    document.getElementById('messagePopup').style.display = 'none';
+}
+
+// Close popup when clicking outside
+document.getElementById('messagePopup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeMessage();
+    }
+});
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeMessage();
+    }
+});
+</script>
